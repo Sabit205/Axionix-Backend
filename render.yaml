@@ -6,7 +6,7 @@ services:
         description: anywhere
     plan: free
 
-  - type: worker
+  - type: web
     name: axionix-worker
     env: node
     plan: free

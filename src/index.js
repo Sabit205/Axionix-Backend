@@ -1,7 +1,15 @@
 require('dotenv').config();
+const http = require('http');
 const { Worker } = require('bullmq');
 const Redis = require('ioredis');
 const { processCrawlJob } = require('./crawler');
+
+// Render Free Tier HTTP Binding (Required to keep 'web' service alive)
+const PORT = process.env.PORT || 10000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('AxionixSearch Worker is alive!\n');
+}).listen(PORT, () => console.log(`Health check server listening on port ${PORT}`));
 
 const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 
