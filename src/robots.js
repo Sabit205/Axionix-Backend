@@ -1,5 +1,4 @@
 const axios = require('axios');
-const xml2js = require('xml2js'); // Need to install this fast or write simple parser
 
 // We can use a simple regex-based parser since we aren't strict, or just cheerio to parse xml.
 // Wait, we have cheerio! We can use cheerio to parse sitemap.xml
