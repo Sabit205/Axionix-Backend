@@ -1,7 +1,9 @@
 services:
   - type: redis
     name: axionix-redis
-    ipAllowList: []
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: anywhere
     plan: free
 
   - type: worker
