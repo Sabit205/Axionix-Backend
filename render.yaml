@@ -1,0 +1,20 @@
+services:
+  - type: redis
+    name: axionix-redis
+    ipAllowList: []
+    plan: free
+
+  - type: web
+    name: axionix-worker
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: axionix-redis
+          property: connectionString
+      - key: DATABASE_URL
+        value: "postgres://user:pass@host:5432/dbname" # Render Postgres internal URL here
