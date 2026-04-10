@@ -47,6 +47,11 @@ async function processCrawlJob(domain, startUrl) {
 
     if (!normalizedUrl || visited.has(normalizedUrl) || !isAllowed(normalizedUrl, disallowedPaths)) continue;
     visited.add(normalizedUrl);
+    
+    // Safety check: Never try to index an XML file or image directly as HTML
+    if (normalizedUrl.toLowerCase().endsWith('.xml') || normalizedUrl.match(/\.(png|jpg|jpeg|gif|pdf|mp4)$/i)) {
+       continue;
+    }
 
     try {
       // 1. Fetch content (Hybrid JS/Static)

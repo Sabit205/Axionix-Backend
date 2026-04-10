@@ -20,11 +20,13 @@ async function fetchContent(url) {
     });
 
     const html = response.data;
+    const contentType = response.headers['content-type'] || '';
     
     // Simple heuristic. If the content length is incredibly short or it smells like an SPA
     const smellsLikeSPA = /<div id=["'](root|app)["']>\s*<\/div>/i.test(html) || html.length < 500;
+    const isXmlOrJson = contentType.includes('xml') || contentType.includes('json') || url.endsWith('.xml');
     
-    if (!smellsLikeSPA) {
+    if (!smellsLikeSPA || isXmlOrJson) {
       return { html, status: response.status, method: 'static' };
     }
 

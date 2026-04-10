@@ -19,4 +19,4 @@ services:
           name: axionix-redis
           property: connectionString
       - key: DATABASE_URL
-        value: "postgres://user:pass@host:5432/dbname" # Render Postgres internal URL here
+        sync: false
