@@ -4,7 +4,7 @@ services:
     ipAllowList: []
     plan: free
 
-  - type: web
+  - type: worker
     name: axionix-worker
     env: node
     plan: free
